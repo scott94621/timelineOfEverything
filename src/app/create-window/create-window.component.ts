@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TimelineEvent, TimelineLocation, TimelineType } from '../models/';
+import { Coordinates, TimelineEvent, TimelineLocation, TimelineType } from '../models/';
 import { DateTime } from 'luxon';
 import { BaseService } from '../base.service';
 
@@ -21,6 +21,7 @@ export class CreateWindowComponent implements OnInit {
     this.timelineEvent = new TimelineEvent();
     this.timelineLocation = new TimelineLocation();
     this.timelineType = new TimelineType();
+    this.timelineLocation.coordinates = new Coordinates();
 
     this.creationOptions = ["event", "location", "type"];
    }
@@ -31,6 +32,18 @@ export class CreateWindowComponent implements OnInit {
 
   createTimelineEvent():void{
     this.baseService.postEvent(this.timelineEvent).subscribe(res => {
+      console.log('succes');
+    })
+  }
+
+  createTimelineType():void{
+    this.baseService.postType(this.timelineType).subscribe(res => {
+      console.log('succes');
+    })
+  }
+
+  createTimelineLocation():void{
+    this.baseService.postLocation(this.timelineLocation).subscribe(res => {
       console.log('succes');
     })
   }

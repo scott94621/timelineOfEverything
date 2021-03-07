@@ -1,6 +1,6 @@
-export interface Coordinates {
-    latitude: number,
-    longitude: number
+export class Coordinates {
+    latitude: number;
+    longitude: number;
     
 
 }

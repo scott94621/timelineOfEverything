@@ -9,7 +9,14 @@ import { BaseService } from './base.service';
 import { CreateWindowComponent } from './create-window/create-window.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatSelectModule } from '@angular/material/select';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +30,12 @@ import { MatSelectModule } from '@angular/material/select';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [BaseService],
   bootstrap: [AppComponent]

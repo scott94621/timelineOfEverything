@@ -1,7 +1,7 @@
 <div class="wrapper">
-    <div class="row">
-        <div class="col-12">
-            
+    <mat-grid-list cols="3" rowHeight="2:1">
+        <mat-grid-tile></mat-grid-tile>
+        <mat-grid-tile>
             <mat-form-field appearance="fill">
                 <mat-label>Options</mat-label>
                 <mat-select [(ngModel)]="selectedValue" name="creationTypes">
@@ -10,51 +10,97 @@
                     </mat-option>
                 </mat-select>
               </mat-form-field>
-              
-        </div>
-    </div>
-</div>
-<div class="container">
-<div class="row">
-    <div class="col-3"></div>
-    <div class="col-6">
-        <div class="form-group">
-            <label for="title"></label>
-            <input type="text" class="form-control" id="title" required [(ngModel)]="timelineEvent.title" name="title"/>
-        </div>
-        <div class="form-group">
-            <label for="description"></label>
-            <input type="text" class="form-control" id="description" required [(ngModel)]="timelineEvent.description" name="description"/>
-        </div>
-        <div class="form-group">
-            <button type="button" class="btn btn-default" (click)="createTimelineEvent()">Buttan</button>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <h3>Location</h3>
-                <div class="form-group">
-                    <label for="countryName"></label>
-                    <input type="text" class="form-control" id="countryName" required [(ngModel)]="timelineLocation.countryName" name="countryName"/>
-                </div>
-                <div class="form-group">
-                    <label for="placeName"></label>
-                    <input type="text" class="form-control" id="placeName" required [(ngModel)]="timelineLocation.placeName" name="placeName"/>
-                </div> 
-            </div>
-            <div class="col-6">
-                <h3>Type</h3>
-                <div class="form-group">
-                    <label for="category"></label>
-                    <input type="text" class="form-control" id="category" required [(ngModel)]="timelineType.category" name="category"/>
-                </div>
-                <div class="form-group">
-                    <label for="subCategory"></label>
-                    <input type="text" class="form-control" id="subCategory" required [(ngModel)]="timelineType.subCategory" name="subCategory"/>
-                </div> 
-            </div>
-        </div>
-    </div>
-    <div class="col-3"></div>
-</div>
-</div>
+        </mat-grid-tile>
+        <mat-grid-tile></mat-grid-tile>
+    </mat-grid-list>      
 
+    <mat-grid-list cols="3" rowHeight="2:1" *ngIf="selectedValue == 'event'">
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Title</mat-label>
+                <input matInput type="text" class="form-control" id="title" required [(ngModel)]="timelineEvent.title" name="title"/>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput  type="text" class="form-control" id="description" required [(ngModel)]="timelineEvent.description" name="description"/>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          
+            <mat-form-field appearance="fill">
+                <mat-label>date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="timelineEvent.date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              
+            <mat-form-field appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker2" [(ngModel)]="timelineEvent.endDate">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+              
+            <button mat-raised-button color="primary" (click)="createTimelineEvent()">Save Event</button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-checkbox class="" [(ngModel)]="timelineEvent.happening">Happening</mat-checkbox>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="3" rowHeight="2:1" *ngIf="selectedValue == 'type'">
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Category</mat-label>
+                <input matInput type="text" class="form-control" id="category" required [(ngModel)]="timelineType.category" name="category"/>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Subcat</mat-label>
+                <input matInput type="text" class="form-control" id="subCategory" required [(ngModel)]="timelineType.subCategory" name="subCategory"/>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput type="text" class="form-control" id="description" required [(ngModel)]="timelineType.description" name="description"/>
+            </mat-form-field>
+            <button mat-button (click)="createTimelineType()">Save Type</button>
+        </mat-grid-tile>
+        <mat-grid-tile></mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="3" rowHeight="2:1" *ngIf="selectedValue == 'location'">
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Country (then)</mat-label>
+                <input matInput type="text" class="form-control" id="countryName" required [(ngModel)]="timelineLocation.countryName" name="countryName"/>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Place</mat-label>
+                <input matInput type="text" class="form-control" id="placeName" required [(ngModel)]="timelineLocation.placeName" name="placeName"/>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>continent</mat-label>
+                <input matInput type="text" class="form-control" id="continent" required [(ngModel)]="timelineLocation.continent" name="continent"/>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>currentCountryName</mat-label>
+                <input matInput type="text" class="form-control" id="currentCountryName" required [(ngModel)]="timelineLocation.currentCountryName" name="currentCountryName"/>
+            </mat-form-field>
+            <button mat-button (click)="createTimelineLocation()">Save Location</button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Latitude</mat-label>
+                <input matInput type="text" class="form-control" id="coordinateX" required [(ngModel)]="timelineLocation.coordinates.latitude" name="coordinateX"/>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Longitude</mat-label>
+                <input matInput type="text" class="form-control" id="coordinateY" required [(ngModel)]="timelineLocation.coordinates.longitude" name="coordinateY"/>
+            </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</div>
