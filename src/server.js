@@ -84,8 +84,28 @@ app.post('/api/createTimelineType', function(req, res,){
     postMethod(type, res);
     });
 
-app.get("/api/getUser", function(req, res){
-    model.find({"title": "Life on Venus"}, function(err, data){
+app.get("/api/getEvents", function(req, res){
+    timelineEvent.find({}, function(err, data){
+        if(err){
+            res.send(err);
+        }else{
+            res.send({data});
+        }
+    })
+})
+
+app.get("/api/getLocations", function(req, res){
+    timelineLocation.find({}, function(err, data){
+        if(err){
+            res.send(err);
+        }else{
+            res.send({data});
+        }
+    })
+})
+
+app.get("/api/getTypes", function(req, res){
+    timelineType.find({}, function(err, data){
         if(err){
             res.send(err);
         }else{

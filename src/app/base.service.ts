@@ -10,8 +10,16 @@ export class BaseService {
 
   constructor(private http:HttpClient) { }
 
-  GetEvent(): Observable<any>{
-    return this.http.get("http://localhost:8080/api/getUser");
+  getEvents(): Observable<any>{
+    return this.http.get("http://localhost:8080/api/getEvents");
+  }
+
+  getLocations(): Observable<any>{
+    return this.http.get("http://localhost:8080/api/getLocations");
+  }
+
+  getTypes(): Observable<any>{
+    return this.http.get("http://localhost:8080/api/getTypes");
   }
 
   postEvent(timelineEvent: TimelineEvent): Observable<any>{
