@@ -1,5 +1,25 @@
-<p>overview works!</p>
 
-<p *ngFor="let event of events">
-    {{ event.title }}
-</p>
+<mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile>
+        <!-- <cdk-virtual-scroll-viewport [itemSize]="13 * 5" class="example-viewport">
+            <div *cdkVirtualFor="let event of events;
+            let index = index; let odd = odd;" [class.example-alternate]="odd">
+                <div class="example-item-detail">Title: {{event.title}}</div>
+                <div class="example-item-detail">Date: {{event.date}}</div>
+                <div class="example-item-detail">EndDate: {{event.endDate}}</div>
+                <div class="example-item-detail">Description: {{event.description}}</div>
+                <div class="example-item-detail">Happening: {{event.happening}}</div>
+            </div>
+        </cdk-virtual-scroll-viewport> -->
+        <cdk-virtual-scroll-viewport [itemSize]="events.length" class="example-viewport">
+            <div *cdkVirtualFor="let event of events;
+            let index = index; let odd = odd;" [class.example-alternate]="odd">
+                <div class="example-item-detail">Title: {{event.title}}</div>
+                
+            </div>
+        </cdk-virtual-scroll-viewport>
+          
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>      

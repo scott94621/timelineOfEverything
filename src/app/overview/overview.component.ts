@@ -1,4 +1,6 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { DateTime } from 'luxon';
 import { element } from 'protractor';
 import { Observable } from 'rxjs';
 import { BaseService } from '../base.service';
@@ -14,7 +16,7 @@ export class OverviewComponent implements OnInit {
   events: TimelineEvent[];
   locations: TimelineLocation[];
   types: TimelineType[];
-
+  
   constructor(private baseService: BaseService) {
     this.events = [];
     this.locations = [];
@@ -22,25 +24,30 @@ export class OverviewComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.events = this.getEvents();
+      this.setEvents();
+    console.log(this.events);
+  //    this.events = [
+  //     {title: "Title", id: 1, date: DateTime.now(), endDate: DateTime.now(), description: "",happening: true, location: new TimelineLocation(), type: new TimelineType()}
+  //   ,
+  //   {title: "Title2", id: 2, date: DateTime.now(), endDate: DateTime.now(), description: "",happening: true, location: new TimelineLocation(), type: new TimelineType()}
+  // ];
     this.locations = this.getLocations();
     this.types = this.getTypes();
   }
 
-  getEvents(): TimelineEvent[]{
+  setEvents(): void{
     try{
-      let events: TimelineEvent[] = [];
       this.baseService.getEvents().subscribe((data: any) =>
         {
           data.data.forEach((event: TimelineEvent) => {
-            events.push(event);
+            if(event.title){
+              this.events.push(event);
+            }
           });
         });
-      return events;
     }
     catch(error){
       console.log(error);
-      return [];
     }
   }
 
